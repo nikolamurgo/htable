@@ -1,34 +1,53 @@
 package psa.naloga3;
 
 /*
- * Razred mora imeplementirati podatkovno strukturo Razprsilne tabele.
- * Za funkcijo uporabite: h(x) = x * 53 mod 100
- * V primeru kolizij uporabite LINEARNO NASLAVLJANJE.
+ * hash function: h(x) = x * 53 mod 100
+ * when collision use linear probing
  */
 public class HashTable2 {
 
 	int[] data;
 
-	/*
-	 * Metoda sprejme število in ga vstavi v tabelo. Metoda vrne true, ce je
-	 * bilo ustavljanje uspešno in false sicer
-	 */
+	public HashTable2() {
+		data = new int[100];
+	}
+
+	public int hashFunction2(int key) {
+		return ((key * 53) % 100 + 100) % 100;
+	}
+
+
 	public boolean insert(int key) {
-		throw new UnsupportedOperationException("To funkcijo morate implementirati");
+		int hashValue = hashFunction2(key);
+		int i=0; // linear probing
+		while(i < 100) {
+			if (data[hashValue + i] == null){
+				data[hashValue + i] = key;
+				return true;
+				break;
+			}else if(data[hashValue +i] != null){
+				i++;
+			}
+		}
+		return false;
 	}
 
-	/*
-	 * Metoda sprejme število in ga poišče v tabeli. Metoda vrne true, ce je
-	 * bilo ustavljanje uspešno in false sicer
-	 */
 	public boolean search(int key) {
-		throw new UnsupportedOperationException("To funkcijo morate implementirati");
+		int hashValue = hashFunction2(key);
+		int i=0; // linear probing
+
+		while(i < 100) {
+			if(data[hashValue + i] == key){
+				return true;
+				break;
+			}else{
+				i++;
+			}
+		}
+		return false;
 	}
 
-	/*
-	 * Metoda sprejme število in ga izbriše iz tabele. Metoda vrne true, ce je
-	 * bilo ustavljanje uspešno in false sicer
-	 */
+
 	public boolean delete(int key) {
 		throw new UnsupportedOperationException("To funkcijo morate implementirati");
 	}
