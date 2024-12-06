@@ -1,16 +1,16 @@
 package psa.naloga3;
 
 /*
- * In case of collisions, use CHAINING, specifically implementing the dictionary
- * as a Hash Table, which you must implement (class HashTable2).
+ * In case of collisions, using CHAINING, specifically implementing the dictionary
+ * as a Hash Table,  (class HashTable2).
  *
- * Be careful, as the key can also be a negative number.
+ * key can also be a negative number.
  */
 
 public class HashTable {
 	HashTable2[] data = new HashTable2[2000];
 
-	HashTable2 ht2 = new HashTable2();
+//	HashTable2 ht2 = new HashTable2();
 
 	// hash function h(x) = x * 701 mod 2000, applied to neg nums also
 	public int hashFunction(int key) {
@@ -42,12 +42,10 @@ public class HashTable {
 
 	public boolean delete(int key) {
 		int hashValue = hashFunction(key);
-		if(data[hashValue] == null && data[hashValue].search(key) == false){
+		if(data[hashValue] == null || data[hashValue].search(key) == false){
 			return false;
-		}else if (data[hashValue].search(key) == true){
-			return data[hashValue].delete(key);
 		}else{
-			return false;
+			return data[hashValue].delete(key);
 		}
 	}
 }

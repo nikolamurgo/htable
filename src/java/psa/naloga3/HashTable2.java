@@ -23,10 +23,11 @@ public class HashTable2 {
 		int hashValue = hashFunction2(key);
 		int i=0; // linear probing
 		while(i < 100) {
-			if (data[hashValue + i] == empty){
-				data[hashValue + i] = key;
+			int index = (hashValue + i) % 100;
+			if (data[index] == empty){
+				data[index] = key;
 				return true;
-			}else if(data[hashValue +i] != empty){
+			}else{
 				i++;
 			}
 		}
@@ -36,9 +37,11 @@ public class HashTable2 {
 	public boolean search(int key) {
 		int hashValue = hashFunction2(key);
 		int i=0; // linear probing
+		int index = (hashValue + i) % 100;
 
-		while(i<100 && data[hashValue+i % 100] != empty){
-			if(data[hashValue +i % 100] == key){
+		while(i<100){
+			index = (hashValue + i) % 100;
+			if(data[index] == key){
 				return true;
 			}else{
 				i++;
@@ -51,9 +54,11 @@ public class HashTable2 {
 	public boolean delete(int key) {
 		int hashValue = hashFunction2(key);
 		int i=0;
-		while(i<100 && data[hashValue + i % 100] != empty){
-			if(data[hashValue + i % 100] == key){
-				data[hashValue + i % 100] = empty;
+		int index = (hashValue + i) % 100;
+		while(i<100){
+			index = (hashValue + i) % 100;
+			if(data[index] == key){
+				data[index] = empty;
 				return true;
 			}else{
 				i++;
