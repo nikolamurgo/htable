@@ -1,4 +1,5 @@
 package psa.naloga3;
+import java.util.Arrays;
 
 /*
  * hash function: h(x) = x * 53 mod 100
@@ -6,10 +7,11 @@ package psa.naloga3;
  */
 public class HashTable2 {
 
-	int[] data;
+	int[] data = new int[100];
+	final int empty = Integer.MIN_VALUE;
 
 	public HashTable2() {
-		data = new int[100];
+		Arrays.fill(data, empty);
 	}
 
 	public int hashFunction2(int key) {
@@ -21,11 +23,10 @@ public class HashTable2 {
 		int hashValue = hashFunction2(key);
 		int i=0; // linear probing
 		while(i < 100) {
-			if (data[hashValue + i] == null){
+			if (data[hashValue + i] == empty){
 				data[hashValue + i] = key;
 				return true;
-				break;
-			}else if(data[hashValue +i] != null){
+			}else if(data[hashValue +i] != empty){
 				i++;
 			}
 		}
@@ -36,10 +37,9 @@ public class HashTable2 {
 		int hashValue = hashFunction2(key);
 		int i=0; // linear probing
 
-		while(i < 100) {
-			if(data[hashValue + i] == key){
+		while(i<100 && data[hashValue+i % 100] != empty){
+			if(data[hashValue +i % 100] == key){
 				return true;
-				break;
 			}else{
 				i++;
 			}
@@ -49,6 +49,6 @@ public class HashTable2 {
 
 
 	public boolean delete(int key) {
-		throw new UnsupportedOperationException("To funkcijo morate implementirati");
+		throw new UnsupportedOperationException("tbi");
 	}
 }

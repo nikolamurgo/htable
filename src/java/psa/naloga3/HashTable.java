@@ -8,13 +8,9 @@ package psa.naloga3;
  */
 
 public class HashTable {
-	HashTable2[] data;
+	HashTable2[] data = new HashTable2[2000];
 
 	HashTable2 ht2 = new HashTable2();
-
-	public HashTable() {
-		data = new int[2000];
-	}
 
 	// hash function h(x) = x * 701 mod 2000, applied to neg nums also
 	public int hashFunction(int key) {
@@ -26,42 +22,25 @@ public class HashTable {
 		int hashValue = hashFunction(key);
 
 		if (data[hashValue] == null) {
-			if(ht2.search(key) == false){
-				data[hashValue] = key;
-				return true;
-			}else{
-				return false;
-			}
-		}else if (data[hashValue] == key){
+			data[hashValue] = new HashTable2();
+		}else if(data[hashValue].search(key)){
 			return false;
-		} else if(data[hashValue] != key){
-			// check if it is in ht2, if yes then return false if not insert in ht2 and ret true
-			if(ht2.search(key)){
-				return false;
-			}else{
-				ht2.insert(key);
-				//return true ????
-			}
 		}
-
+		return data[hashValue].insert(key);
 	}
 
 	public boolean search(int key) {
 		int hashValue = hashFunction(key);
 
-		if (data[hashValue] == key){
-			return true;
-		}else if (data[hashValue] = null || data[hashValue] != key) {
-			if(ht2.search(key)){
-				return true;
-			}else{
-				return false;
-			}
+		if(data[hashValue] == null){
+			return false;
+		}else{
+			return data[hashValue].search(key);
 		}
 	}
 
 
 	public boolean delete(int key) {
-		throw new UnsupportedOperationException("tbe");
+		throw new UnsupportedOperationException("tbi");
 	}
 }
