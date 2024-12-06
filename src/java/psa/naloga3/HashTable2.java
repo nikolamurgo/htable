@@ -49,6 +49,16 @@ public class HashTable2 {
 
 
 	public boolean delete(int key) {
-		throw new UnsupportedOperationException("tbi");
+		int hashValue = hashFunction2(key);
+		int i=0;
+		while(i<100 && data[hashValue + i % 100] != empty){
+			if(data[hashValue + i % 100] == key){
+				data[hashValue + i % 100] = empty;
+				return true;
+			}else{
+				i++;
+			}
+		}
+		return false;
 	}
 }

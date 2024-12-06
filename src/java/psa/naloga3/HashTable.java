@@ -41,6 +41,13 @@ public class HashTable {
 
 
 	public boolean delete(int key) {
-		throw new UnsupportedOperationException("tbi");
+		int hashValue = hashFunction(key);
+		if(data[hashValue] == null && data[hashValue].search(key) == false){
+			return false;
+		}else if (data[hashValue].search(key) == true){
+			return data[hashValue].delete(key);
+		}else{
+			return false;
+		}
 	}
 }
